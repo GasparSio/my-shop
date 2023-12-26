@@ -1,7 +1,9 @@
 const express = require('express');
 const { faker } = require('@faker-js/faker');
 
-app.get('/products', (req, res) => {
+const router = express.Router();
+
+router.get('/', (req, res) => {
     const products = [];
     const { size } = req.query;
     const limit = size || 10;
@@ -14,10 +16,10 @@ app.get('/products', (req, res) => {
     }
     res.json(products);
 });
-app.get('/products/filter', (req, res) => {
+router.get('/filter', (req, res) => {
     res.send('yo soy un filter');
 });
-app.get('/products/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const id = req.params.id;
     res.json({
         id,
@@ -25,3 +27,5 @@ app.get('/products/:id', (req, res) => {
         price: 1000,
     });
 });
+
+module.exports = router;

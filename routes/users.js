@@ -1,7 +1,8 @@
 const express = require('express');
-const { faker } = require('@faker-js/faker');
 
-app.get('/users', (req, res) => {
+const router = express.Router();
+
+router.get('/', (req, res) => {
     const { limit, offset } = req.query;
     if(limit || offset){
         res.json({
@@ -12,4 +13,6 @@ app.get('/users', (req, res) => {
     else{
         res.send('no existen parametros');
     }
-})
+});
+
+module.exports = router;

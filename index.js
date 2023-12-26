@@ -1,5 +1,5 @@
 const express = require('express');
-const { faker } = require('@faker-js/faker');
+const routerApi = require('./routes/index');
 
 const app = express();
 
@@ -13,15 +13,6 @@ app.get('/', (req, res) => {
     res.send('hello world');
 });
 
-app.get('/categories/:categoryId/products/:productId', (req, res) => {
-    const { categoryId, productId} = req.params;
-    res.json(
-        {
-            categoryId, 
-            productId,
-            product: 'Producto 2', 
-            price: 1000,
-        }
-    )
-});
+routerApi(app);
+
 
