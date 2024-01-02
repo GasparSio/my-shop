@@ -5,32 +5,30 @@ const router = express.Router();
 const service = new ProductService();
 
 
-router.get('/', (req, res) => {
-    const products = service.find();    
+router.get('/', async (req, res) => {
+    const products = await service.find();    
     res.json(products);
 });
-router.get('/filter', (req, res) => {
-    res.send('yo soy un filter');
-});
-router.get('/:id', (req, res) => {
+
+router.get('/:id', async (req, res) => {
     const id = req.params.id;
-    const product = service.findOne(id);
+    const product = await service.findOne(id);
     res.json(product);
 });
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const body = req.body;
-    const newProduct = service.create(body);
+    const newProduct = await service.create(body);
     res.status(201).json(newProduct)
 })
-router.patch('/:id', (req, res) => {
+router.patch('/:id', async (req, res) => {
     const { id } = req.params;
     const body = req.body;
-    const product = service.update(id, body)
+    const product = await service.update(id, body)
     res.json(product)
 })
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
     const { id } = req.params;
-    const product = service.delete(id);
+    const product = await service.delete(id);
     res.json(product)
 })
 
