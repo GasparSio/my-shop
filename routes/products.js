@@ -1,5 +1,6 @@
 const express = require('express');
 const ProductService = require('../services/product-service');
+const { tr } = require('@faker-js/faker');
 
 const router = express.Router();
 const service = new ProductService();
@@ -10,10 +11,14 @@ router.get('/', async (req, res) => {
     res.json(products);
 });
 
-router.get('/:id', async (req, res) => {
-    const id = req.params.id;
-    const product = await service.findOne(id);
-    res.json(product);
+router.get('/:id', async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const product = await service.findOne(id);
+        res.json(product);
+    } catch (error) {
+        next(error)
+    }
 });
 router.post('/', async (req, res) => {
     const body = req.body;

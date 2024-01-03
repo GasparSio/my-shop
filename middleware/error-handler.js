@@ -1,9 +1,11 @@
-function lorError(err, req, res, next){
-    console.error(err);
-    next(err);
+function logError(error, req, res, next){
+    console.log('logError');
+    console.error(error);
+    next(error);
 };
 
 function errorhandler(error, req, res, next){
+    console.log('errorhandler');
     res.status(500).json({
         message: error.message,
         stack: error.stack
@@ -11,4 +13,4 @@ function errorhandler(error, req, res, next){
 }
 
 
-module.exports = { lorError, errorhandler }
+module.exports = { logError, errorhandler }

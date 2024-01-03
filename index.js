@@ -1,5 +1,7 @@
 const express = require('express');
 const routerApi = require('./routes/index');
+const { errorhandler, logError} = require('./middleware/error-handler');
+
 
 const app = express();
 
@@ -17,5 +19,11 @@ app.get('/', (req, res) => {
 });
 
 routerApi(app);
+
+app.use(errorhandler);
+app.use(logError);
+
+
+
 
 
